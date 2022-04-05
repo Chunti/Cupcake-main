@@ -59,6 +59,7 @@ public class UserMapper
                     role = rs.getInt("role");
                     phone = rs.getInt("phone");
                     balance = rs.getInt("balance");
+                    
                 } else
                 {
                     throw new DatabaseException("Fejl i brugernavn eller kodeord");
