@@ -59,7 +59,7 @@ public class UserMapper
                     role = rs.getInt("role");
                     phone = rs.getInt("phone");
                     balance = rs.getInt("balance");
-                    
+
                 } else
                 {
                     throw new DatabaseException("Fejl i brugernavn eller kodeord");
@@ -137,7 +137,7 @@ public class UserMapper
     public static void createUserTest(ConnectionPool connectionPool){
         UserMapper userMapper = new UserMapper(connectionPool);
         try {
-            userMapper.createUser("Zack Ottesen","zo@pyra.dk", "Hej",1,30329013,500);
+            userMapper.createUser("Mogens Lykketoft","mogens@lykketoft.dk", "MogensErGud",0,20202020,1000);
         } catch (DatabaseException e) {
             e.printStackTrace();
         }

@@ -27,7 +27,7 @@ public class Login extends HttpServlet
     public void init() throws ServletException
     {
         this.connectionPool = ApplicationStart.getConnectionPool();
-        //UserMapper.createUserTest(connectionPool);
+        UserMapper.createUserTest(connectionPool);
 
 
     }
@@ -48,7 +48,6 @@ public class Login extends HttpServlet
         User user = null;
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-
         try
         {
             user = userMapper.login(username, password);
