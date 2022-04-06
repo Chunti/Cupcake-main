@@ -5,6 +5,7 @@ import dat.startcode.model.entities.User;
 import dat.startcode.model.exceptions.DatabaseException;
 //import dat.startcode.model.persistence.UserMapper;
 import dat.startcode.model.persistence.ConnectionPool;
+import dat.startcode.model.persistence.OrderMapper;
 import dat.startcode.model.persistence.UserMapper;
 //import dat.startcode.persistence.UserMapper;
 
@@ -27,7 +28,7 @@ public class Login extends HttpServlet
     public void init() throws ServletException
     {
         this.connectionPool = ApplicationStart.getConnectionPool();
-        UserMapper.createUserTest(connectionPool);
+        //UserMapper.createUserTest(connectionPool);
 
 
     }
@@ -53,6 +54,9 @@ public class Login extends HttpServlet
             user = userMapper.login(username, password);
             session = request.getSession();
             session.setAttribute("user", user); // adding user object to session scope
+            OrderMapper orderMapper = new OrderMapper(connectionPool);
+            int orderId = orderMapper.createOrder(user.getUserId());
+            session.setAttribute("orderId", orderId);
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
         catch (DatabaseException e)

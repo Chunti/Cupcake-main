@@ -46,4 +46,36 @@ public class ToppingMapper {
         }
         return toppingArrayList;
     }
+
+
+    public Topping getToppingFromString(int toppingId){
+
+
+        Logger.getLogger("web").log(Level.INFO, "");
+
+        Topping topping = null;
+
+        String sql = "SELECT * FROM topping where topping_id= ? ";
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+
+                ps.setInt(1,toppingId);
+
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()){
+                    String toppingName = rs.getString("topping_name");
+                    int price = rs.getInt("price");
+
+                    topping = new Topping(toppingName,price);
+
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return topping;
+
+    }
+
 }

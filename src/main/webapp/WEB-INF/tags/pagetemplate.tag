@@ -30,6 +30,9 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
+                    <c:if test="${sessionScope.user != null}">
+                        <a class="nav-item nav-link">${sessionScope.user.email}</a>
+                    </c:if>
                     <c:if test="${sessionScope.user != null }">
                     <a class="nav-item nav-link" href="${pageContext.request.contextPath}/Bestil">Bestil</a>
                     </c:if>

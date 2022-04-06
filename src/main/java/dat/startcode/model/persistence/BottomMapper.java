@@ -23,8 +23,6 @@ public class BottomMapper
     }
 
     public ArrayList<Bottom> getBottomData() throws DatabaseException {
-
-        //createUser("mogens@lykketoft.dk", "Mogens Lykketoft", "MogensErGud","admin");
         Logger.getLogger("web").log(Level.INFO, "");
 
         ArrayList<Bottom> bottomArrayList = new ArrayList<>();
@@ -51,6 +49,36 @@ public class BottomMapper
 
         return bottomArrayList;
 
+
+    }
+
+    public Bottom getBottomFromString(int bottomId){
+
+
+        Logger.getLogger("web").log(Level.INFO, "");
+
+        Bottom bottom = null;
+
+        String sql = "SELECT * FROM bottom where bottom_id= ? ";
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                
+                ps.setInt(1,bottomId);
+
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()){
+                    String bottomName = rs.getString("bottom_name");
+                    int price = rs.getInt("price");
+                    
+                    bottom = new Bottom(bottomName,price);
+                    
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return bottom;
 
     }
 

@@ -37,6 +37,7 @@ public class UserMapper
         System.out.println(email);
 
         String sql = "SELECT * FROM `user` WHERE email = ? ";
+        int userId;
         byte[] hash;
         byte[] salt;
         String name;
@@ -53,6 +54,7 @@ public class UserMapper
 
                 if (rs.next()) {
                     System.out.println("ello");
+                    userId = rs.getInt("user_id");
                     hash = rs.getBytes("Hash");
                     salt = rs.getBytes("Salt");
                     name = rs.getString("name");
@@ -70,7 +72,7 @@ public class UserMapper
                 byte[] userPassword = factory1.generateSecret(check).getEncoded();
                 if(Arrays.equals(hash,userPassword)){
 
-                    user = new User(name,email,role,phone,balance);
+                    user = new User(userId,name,email,role,phone,balance);
                     System.out.println("Hej det er faktisk rigtigt password");
 
                 }
@@ -121,7 +123,7 @@ public class UserMapper
                 int maxRows = ps.getMaxRows();
                 if (rowsAffected == 1)
                 {
-                    user = new User(name,email, role,phone,balance);
+                    user = new User(maxRows,name,email, role,phone,balance);
                 } else
                 {
                     throw new DatabaseException("Brugeren med email = " + email + " kunne ikke oprettes i databasen");

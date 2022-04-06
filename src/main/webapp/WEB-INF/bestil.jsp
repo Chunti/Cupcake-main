@@ -14,23 +14,33 @@
 
     <jsp:body>
 
-        <label for="bottom">Vælg bund</label>
-        <select name="bottom" id="bottom">
-            <c:forEach items="${applicationScope.bottoms}" var="items" varStatus="loop">
-                <option value="${loop.index}">${items.name} (${items.price},-)</option>
-            </c:forEach>
+        <form method="post">
+            <label for="bottom">Vælg bund</label>
+            <br>
+            <select name="bottom" id="bottom">
+                <c:forEach items="${applicationScope.bottoms}" var="items" varStatus="loop">
+                    <option value="${loop.index}">${items.name} (${items.price},-)</option>
+                </c:forEach>
 
 
-        </select>
+            </select>
+            <br>
 
-        <label for="topping">Vælg topping</label>
-        <select name="topping" id="topping">
-            <c:forEach items="${applicationScope.topping}" var="items" varStatus="loop">
-                <option value="${loop.index}">${items.name} (${items.price},-)</option>
-            </c:forEach>
+            <label for="topping">Vælg topping</label>
+            <br>
+            <select name="topping" id="topping">
+                <c:forEach items="${applicationScope.topping}" var="items" varStatus="loop">
+                    <option value="${loop.index}">${items.name} (${items.price},-)</option>
+                </c:forEach>
+            </select>
+            <br>
+            <br>
+            <input id="number" type="number" name="number" value="1" max="50" min="1" >
+            <br>
+            <br>
+            <input type="submit" id="button" value="Put i kurv" >
+        </form>
 
-
-        </select>
 
     </jsp:body>
 
