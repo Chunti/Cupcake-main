@@ -25,5 +25,9 @@
             <input type="submit"  value="Log in"/>
         </form>
 
+        <br>
+        <br>
+        <p>Ikke medlem? lav en  <a href="createuser.jsp">bruger</a></p>
+
     </jsp:body>
 </t:pagetemplate>

@@ -17,8 +17,10 @@ import java.util.ArrayList;
 @WebServlet(name = "Bestil", value = "/Bestil")
 public class Bestil extends HttpServlet {
 
-    private ConnectionPool connectionPool;
+
     HttpSession session;
+    private ConnectionPool connectionPool;
+
 
     @Override
     public void init() throws ServletException
@@ -56,6 +58,7 @@ public class Bestil extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+
         response.setContentType("text/html");
         int bottom = Integer.parseInt(request.getParameter("bottom"))+1;
         int topping = Integer.parseInt(request.getParameter("topping"))+1;
@@ -63,8 +66,6 @@ public class Bestil extends HttpServlet {
 
         session = request.getSession();
         int orderId = (int) session.getAttribute("orderId");
-
-        Cupcake cupcake = new Cupcake(bottom,topping,amount,connectionPool);
 
         OrderMapper orderMapper = new OrderMapper(connectionPool);
         orderMapper.createOrderline(orderId,bottom,topping,amount);

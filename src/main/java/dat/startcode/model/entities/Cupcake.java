@@ -6,28 +6,27 @@ import dat.startcode.model.persistence.ToppingMapper;
 
 public class Cupcake {
 
-    Bottom bottom;
-    Topping topping;
-    int amount;
+    String bottom;
+    String topping;
+    int price;
 
-    public Cupcake(int bottomId, int toppingId, int amount, ConnectionPool connectionPool) {
-        BottomMapper bottomMapper = new BottomMapper(connectionPool);
-        ToppingMapper toppingMapper = new ToppingMapper(connectionPool);
+    public Cupcake(String bottomName, int bottomPrice, String toppingName,int toppingPrice, int amount) {
 
-        this.bottom = bottomMapper.getBottomFromString(bottomId);
-        this.topping = toppingMapper.getToppingFromString(toppingId);
-        this.amount = amount;
+        this.bottom = bottomName;
+        this.topping = toppingName;
+        this.price = (bottomPrice+toppingPrice)*amount;
     }
 
-    public Bottom getBottom() {
+
+    public String getBottom() {
         return bottom;
     }
 
-    public Topping getTopping() {
+    public String getTopping() {
         return topping;
     }
 
-    public int getAmount() {
-        return amount;
+    public int getPrice() {
+        return price;
     }
 }

@@ -37,10 +37,16 @@
                     <a class="nav-item nav-link" href="${pageContext.request.contextPath}/Bestil">Bestil</a>
                     </c:if>
                     <c:if test="${sessionScope.user != null }">
-                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/">Ordre</a>
+                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/Order">Ordre</a>
                     </c:if>
                     <c:if test="${sessionScope.user.role == 1 }">
                         <a class="nav-item nav-link" href="${pageContext.request.contextPath}/">Kunder</a>
+                    </c:if>
+
+                    <c:if test="${sessionScope.user != null }">
+                    <a class="navbar-brand" href="${pageContext.request.contextPath}/Basket">
+                        <img src="${pageContext.request.contextPath}/images/basket.png" width="25px;" height="25px;" class="img-fluid"/>
+                    </a>
                     </c:if>
 
                     <c:if test="${sessionScope.user == null }">

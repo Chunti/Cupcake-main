@@ -36,7 +36,7 @@ public class BottomMapper
 
                 while(rs.next()){
                     String name = rs.getString("bottom_name");
-                    int price = rs.getInt("price");
+                    int price = rs.getInt("bottom_price");
                     Bottom bottom = new Bottom(name,price);
                     bottomArrayList.add(bottom);
                 }
@@ -69,7 +69,7 @@ public class BottomMapper
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()){
                     String bottomName = rs.getString("bottom_name");
-                    int price = rs.getInt("price");
+                    int price = rs.getInt("bottom_price");
                     
                     bottom = new Bottom(bottomName,price);
                     

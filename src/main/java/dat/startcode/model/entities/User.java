@@ -54,4 +54,6 @@ public class User
     public int getBalance() {
         return balance;
     }
+
+    public void subtrackBalance(int newBalance){ balance = balance-newBalance;}
 }

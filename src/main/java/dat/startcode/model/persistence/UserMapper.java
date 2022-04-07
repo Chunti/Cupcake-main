@@ -146,5 +146,25 @@ public class UserMapper
 
     }
 
+    public void updateUser(User user){
 
+        Logger.getLogger("web").log(Level.INFO, "");
+
+        String sql = "update `user` set `name` = ?, email = ?, phone = ?, balance = ? where user_id = ?;";
+
+        try (Connection connection = connectionPool.getConnection())
+        {
+            try (PreparedStatement ps = connection.prepareStatement(sql))
+            {
+                ps.setString(1, user.getName());
+                ps.setString(2, user.getEmail());
+                ps.setInt(3,user.getPhoneNumber());
+                ps.setInt(4,user.getBalance());
+                ps.setInt(5,user.getUserId());
+                ps.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

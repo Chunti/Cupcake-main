@@ -5,11 +5,12 @@
 
 <t:pagetemplate>
     <jsp:attribute name="header">
-         Welcome to the frontpage
+        Bestil din cupcake
+
     </jsp:attribute>
 
     <jsp:attribute name="footer">
-        Welcome to the frontpage
+        Bestil din cupcake
     </jsp:attribute>
 
     <jsp:body>

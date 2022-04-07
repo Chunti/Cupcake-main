@@ -35,7 +35,7 @@ public class ToppingMapper {
 
                 while(rs.next()){
                     String name = rs.getString("topping_name");
-                    int price = rs.getInt("price");
+                    int price = rs.getInt("topping_price");
                     Topping topping = new Topping(name,price);
                     toppingArrayList.add(topping);
                 }
@@ -65,7 +65,7 @@ public class ToppingMapper {
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()){
                     String toppingName = rs.getString("topping_name");
-                    int price = rs.getInt("price");
+                    int price = rs.getInt("topping_price");
 
                     topping = new Topping(toppingName,price);
 
