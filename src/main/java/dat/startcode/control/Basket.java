@@ -56,8 +56,6 @@ public class Basket extends HttpServlet {
         HttpSession session = request.getSession();
 
         String delete = request.getParameter("delete");
-        String pay = request.getParameter("button");
-
         if(delete != null){
 
             int index = Integer.parseInt(delete);
@@ -73,6 +71,8 @@ public class Basket extends HttpServlet {
             user.subtrackBalance((int) session.getAttribute("totalPrice"));
             UserMapper userMapper = new UserMapper(connectionPool);
             userMapper.updateUser(user);
+            session.setAttribute("customerOrderId",session.getAttribute("orderId"));
+            session.setAttribute("orderId", 0);
             request.getRequestDispatcher("WEB-INF/payed.jsp").forward(request,response);
         }
 

@@ -18,7 +18,7 @@
         <h3>You can log in here</h3>
 
         <form action="login" method="post">
-            <label for="username">Username: </label>
+            <label for="username">Email: </label>
             <input type="text" id="username" name="username"/>
             <label for="password">Password: </label>
             <input type="password" id="password" name="password"/>
@@ -27,7 +27,7 @@
 
         <br>
         <br>
-        <p>Ikke medlem? lav en  <a href="createuser.jsp">bruger</a></p>
+        <p>Not a member? Create an  <a href="createuser.jsp">account</a></p>
 
     </jsp:body>
 </t:pagetemplate>

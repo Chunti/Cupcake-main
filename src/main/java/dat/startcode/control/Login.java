@@ -52,11 +52,15 @@ public class Login extends HttpServlet
         try
         {
             user = userMapper.login(username, password);
+            if(user == null){
+               request.setAttribute("errormessage", "Login was invalid, try again with a different email or password.");
+               request.getRequestDispatcher("error.jsp").forward(request,response);
+            }
             session = request.getSession();
             session.setAttribute("user", user); // adding user object to session scope
             OrderMapper orderMapper = new OrderMapper(connectionPool);
-            int orderId = orderMapper.createOrder(user.getUserId());
-            session.setAttribute("orderId", orderId);
+
+            session.setAttribute("orderId", 0);
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
         catch (DatabaseException e)

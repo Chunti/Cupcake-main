@@ -71,16 +71,16 @@
     <hr/>
     <div class="row mt-4">
         <div class="col">
-            Nørgaardsvej 30<br/>
-            2800 Lyngby
+            Olsker, Lindesgårdsvej 1 <br>
+            3770 Allinge
         </div>
         <div class="col">
-            <jsp:invoke fragment="footer"/><br/>
-            <p>&copy; 2022 Cphbusiness</p>
+            Zack Ottesen <br>
+            Louise Bengtsen
         </div>
         <div class="col">
-            Datamatikeruddannelsen<br/>
-            2. semester forår 2022
+            Authorised cupcake eaters<br/>
+            Hardcore cupcake handling since 2018
         </div>
     </div>
 

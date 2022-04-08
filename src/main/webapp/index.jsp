@@ -9,12 +9,14 @@
     </jsp:attribute>
 
     <jsp:attribute name="footer">
-        Welcome to the frontpage
+        Welcome to Olser cupcakes
+
     </jsp:attribute>
 
     <jsp:body>
 
-        <p>Startcode for 2nd semester </p>
+        Olsker Cupcakes started as Bornholms first cupcake-bakery, and we are proud to follow the traditionen with the beautiful, small cakes. They tast both juice and sweet, but is also a true wounder for the eye with elegant toppings. Perfect for every auction.
+        <br><br>
 
         <c:if test="${sessionScope.user != null}">
             <p>You are logged in with the role of "${sessionScope.user.role}".</p>

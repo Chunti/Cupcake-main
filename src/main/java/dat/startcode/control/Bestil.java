@@ -1,10 +1,7 @@
 package dat.startcode.control;
 
 import dat.startcode.model.config.ApplicationStart;
-import dat.startcode.model.entities.Bottom;
-import dat.startcode.model.entities.Cupcake;
-import dat.startcode.model.entities.Topping;
-import dat.startcode.model.entities.User;
+import dat.startcode.model.entities.*;
 import dat.startcode.model.exceptions.DatabaseException;
 import dat.startcode.model.persistence.*;
 
@@ -29,6 +26,14 @@ public class Bestil extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        session = request.getSession();
+        OrderMapper orderMapper = new OrderMapper(connectionPool);
+        if( (int) session.getAttribute("orderId") == 0){
+            User user = (User) session.getAttribute("user");
+            int orderId = orderMapper.createOrder(user.getUserId());
+            session.setAttribute("orderId", orderId);
+        }
 
         BottomMapper bottomMapper = new BottomMapper(connectionPool);
         ToppingMapper toppingMapper = new ToppingMapper(connectionPool);

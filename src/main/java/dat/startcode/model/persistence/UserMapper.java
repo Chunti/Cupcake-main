@@ -73,10 +73,12 @@ public class UserMapper
                 SecretKeyFactory factory1 = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
                 byte[] userPassword = factory1.generateSecret(check).getEncoded();
                 if(Arrays.equals(hash,userPassword)){
-
                     user = new User(userId,name,email,role,phone,balance);
                     System.out.println("Hej det er faktisk rigtigt password");
-
+                }
+                else{
+                    System.out.println("Wrong Password");
+                    return null;
                 }
             } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
                 e.printStackTrace();

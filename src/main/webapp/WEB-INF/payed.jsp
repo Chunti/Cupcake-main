@@ -14,7 +14,7 @@
 
     <jsp:body>
 
-        <p>Du har nu betalt for dine cupcakes. Dit ordre nummer er ${sessionScope.orderId} og din nye kredit er ${sessionScope.user.balance}.</p>
+        <p>Du har nu betalt for dine cupcakes. Dit ordre nummer er ${sessionScope.customerOrderId} og din nye kredit er ${sessionScope.user.balance}.</p>
 
 
 
