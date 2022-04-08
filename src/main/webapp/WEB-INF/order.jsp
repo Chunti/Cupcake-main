@@ -21,6 +21,10 @@
                         <div class="card-body">
                             <c:if test="${sessionScope.user.role == 1 }">
                             <h4 class="card-title">Order number: ${item.orderId} <br>Date: ${item.date} <br> Customer number: ${item.userId} </h4>
+                                <form method="post">
+                                    <button type="submit" name="delete" value="${item.orderId}">Delete</button>
+                                </form>
+
                             </c:if>
                             <c:if test="${sessionScope.user.role == 0 }">
                                 <h4 class="card-title">Order number: ${item.orderId} <br>Date: ${item.date} <br> </h4>

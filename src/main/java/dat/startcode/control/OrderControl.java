@@ -40,5 +40,10 @@ public class OrderControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        OrderMapper orderMapper = new OrderMapper(connectionPool);
+        int orderId = Integer.parseInt(request.getParameter("delete"));
+        System.out.println(orderId);
+        orderMapper.deleteOrder(orderId);
+        doGet(request,response);
     }
 }

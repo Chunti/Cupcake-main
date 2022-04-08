@@ -80,7 +80,7 @@ public class OrderMapper {
 
         Logger.getLogger("web").log(Level.INFO, "");
 
-        String sql = "select bottom_name, bottom_price , topping_name, topping_price, amount from orderline  " +
+        String sql = "select orderline.bottom_id, orderline.topping_id, bottom_name, bottom_price , topping_name, topping_price, amount from orderline  " +
                 "inner join bottom on orderline.bottom_id = bottom.bottom_id " +
                 "inner join topping on orderline.topping_id = topping.topping_id " +
                 "where order_id = ?;";
@@ -91,13 +91,16 @@ public class OrderMapper {
                 ResultSet rs = ps.executeQuery();
 
                 while (rs.next()) {
+                    int bottomId = rs.getInt("bottom_id");
+                    int toppingId = rs.getInt("topping_id");
+
                     String bottom = rs.getString("bottom_name");
                     int bottomPrice = rs.getInt("bottom_price");
                     String topping = rs.getString("topping_name");
                     int toppingPrice = rs.getInt("topping_price");
                     int amount = rs.getInt("amount");
 
-                    cupcakes.add(new Cupcake(bottom, bottomPrice, topping, toppingPrice, amount));
+                    cupcakes.add(new Cupcake(bottomId,toppingId,bottom, bottomPrice, topping, toppingPrice, amount));
                 }
             }
         } catch (SQLException e) {
@@ -192,5 +195,51 @@ public class OrderMapper {
             e.printStackTrace();
         }
         return orders;
+    }
+
+    public void deleteOrderline(int orderId, Cupcake cupcake){
+
+        Logger.getLogger("web").log(Level.INFO, "");
+
+        String sql = "delete from orderline where order_id = ? AND bottom_id = ? AND topping_id = ? AND amount = ?;";
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, orderId);
+                ps.setInt(2, cupcake.getBottomId());
+                ps.setInt(3, cupcake.getToppingId());
+                ps.setInt(4, cupcake.getAmount());
+                ps.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteOrder(int orderId){
+        Logger.getLogger("web").log(Level.INFO, "");
+
+        String sql = "delete from orderline where order_id = 13;";
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, orderId);
+                ps.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        sql = "delete from `order` where order_id = ?;";
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, orderId);
+                ps.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }

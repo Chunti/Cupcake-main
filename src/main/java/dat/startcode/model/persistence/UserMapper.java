@@ -1,6 +1,7 @@
 package dat.startcode.model.persistence;
 /*import dat.startcode.entities.User;
 import dat.startcode.exceptions.DatabaseException;*/
+import dat.startcode.model.entities.Customer;
 import dat.startcode.model.entities.User;
 import dat.startcode.model.exceptions.DatabaseException;
 import dat.startcode.model.persistence.ConnectionPool;
@@ -12,6 +13,7 @@ import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -167,4 +169,60 @@ public class UserMapper
             e.printStackTrace();
         }
     }
+
+    public ArrayList<Customer> getAllUsers(){
+
+        Logger.getLogger("web").log(Level.INFO, "");
+        String sql = "SELECT * FROM `user`;";
+
+        ArrayList<Customer> customers = new ArrayList<>();
+
+        try (Connection connection = connectionPool.getConnection())
+        {
+            try (PreparedStatement ps = connection.prepareStatement(sql))
+            {
+
+                ResultSet rs = ps.executeQuery();
+
+                while (rs.next()){
+                    int userId = rs.getInt("user_id");
+                    String name = rs.getString("name");
+                    String email = rs.getString("email");
+                    int phoneNumber = rs.getInt("phone");
+                    int balance = rs.getInt("balance");
+                    customers.add(new Customer(userId,name,email,phoneNumber,balance));
+                }
+
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return customers;
+    }
+
+    public void updateCustomerBalance (int userId, int balance){
+
+        Logger.getLogger("web").log(Level.INFO, "");
+        String sql = "UPDATE `user` set balance = balance + ? where user_id = ?;";
+
+        try (Connection connection = connectionPool.getConnection())
+        {
+            try (PreparedStatement ps = connection.prepareStatement(sql))
+            {
+                ps.setInt(1,balance);
+                ps.setInt(2,userId);
+
+                ps.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+
+
+
 }

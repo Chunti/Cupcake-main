@@ -22,13 +22,14 @@
                   <div class="card-body">
                       <h4 class="card-title">${item.bottom} <br>${item.topping} <br> </h4>
                       <p class="card-text">${item.price} <br><br></p>
+                      <button type="submit" name="delete" value="${loop.index}">Delete</button>
                   </div>
               </div>
           </div>
       </c:forEach>
 
           <h3>Samlet pris: ${sessionScope.totalPrice}</h3>
-      <input type="submit" id="button" value="Betal" >
+      <input type="submit" name="button" id="button" value="Betal" >
       </form>
 
   </jsp:body>

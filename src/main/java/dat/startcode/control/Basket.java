@@ -55,10 +55,31 @@ public class Basket extends HttpServlet {
 
         HttpSession session = request.getSession();
 
-        User user = (User) session.getAttribute("user");
-        user.subtrackBalance((int) session.getAttribute("totalPrice"));
-        UserMapper userMapper = new UserMapper(connectionPool);
-        userMapper.updateUser(user);
-        request.getRequestDispatcher("WEB-INF/payed.jsp").forward(request,response);
+        String delete = request.getParameter("delete");
+        String pay = request.getParameter("button");
+
+        if(delete != null){
+
+            int index = Integer.parseInt(delete);
+            ArrayList<Cupcake> cupcakes = (ArrayList<Cupcake>) session.getAttribute("orderline");
+            int orderId = (int) session.getAttribute("orderId");
+            OrderMapper orderMapper = new OrderMapper(connectionPool);
+            orderMapper.deleteOrderline(orderId,cupcakes.get(index));
+            doGet(request,response);
+
+        }
+        else{
+            User user = (User) session.getAttribute("user");
+            user.subtrackBalance((int) session.getAttribute("totalPrice"));
+            UserMapper userMapper = new UserMapper(connectionPool);
+            userMapper.updateUser(user);
+            request.getRequestDispatcher("WEB-INF/payed.jsp").forward(request,response);
+        }
+
+
     }
+
+
+
+
 }

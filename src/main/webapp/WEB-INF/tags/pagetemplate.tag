@@ -40,7 +40,7 @@
                     <a class="nav-item nav-link" href="${pageContext.request.contextPath}/Order">Ordre</a>
                     </c:if>
                     <c:if test="${sessionScope.user.role == 1 }">
-                        <a class="nav-item nav-link" href="${pageContext.request.contextPath}/">Kunder</a>
+                        <a class="nav-item nav-link" href="${pageContext.request.contextPath}/Customer">Kunder</a>
                     </c:if>
 
                     <c:if test="${sessionScope.user != null }">

@@ -18,9 +18,6 @@ public class UserControl extends HttpServlet {
     public void init() throws ServletException
     {
         this.connectionPool = ApplicationStart.getConnectionPool();
-        //UserMapper.createUserTest(connectionPool);
-
-
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
